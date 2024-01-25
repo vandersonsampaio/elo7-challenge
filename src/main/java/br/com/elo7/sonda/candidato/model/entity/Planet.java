@@ -2,14 +2,11 @@ package br.com.elo7.sonda.candidato.model.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,34 +16,40 @@ import java.util.List;
 public class Planet {
 
 	@Id
-	private Long id;
+	private String id;
 
 	@Getter
 	@Indexed(unique = true)
 	@EqualsAndHashCode.Include
+	@Field("Name")
 	private String name;
 
 	@Getter
+	@Field("Width")
 	private int width;
 
 	@Getter
+	@Field("Height")
 	private int height;
 
+	@Field("Map")
 	private int[][] map;
 
 	@Getter
-	private final List<Probe> probes;
+	@Field("Probes")
+	private List<Probe> probes;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
+	@Getter
+	@Field("Register_Time")
 	private LocalDateTime registerTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
+	@Getter
+	@Field("Update_Time")
 	private LocalDateTime updateTime;
 
 	public Planet() {
 		probes = new ArrayList<>();
+		registerTime = LocalDateTime.now();
 	}
 
 	public Planet(String name, int width, int height) {

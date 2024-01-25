@@ -1,7 +1,6 @@
 package br.com.elo7.sonda.candidato.service;
 
 import br.com.elo7.sonda.candidato.model.entity.Planet;
-import br.com.elo7.sonda.candidato.model.entity.Probe;
 import br.com.elo7.sonda.candidato.model.repository.PlanetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,16 +14,12 @@ public class PlanetServiceImpl implements PlanetService {
     private final PlanetRepository repository;
 
     @Override
-    public Planet create(String name, int width, int height, List<Probe> probes) {
+    public Planet create(String name, int width, int height) {
         if (repository.existsByName(name)) {
             throw new RuntimeException();
         }
 
-        Planet planet = new Planet(name, width, height);
-
-        probes.forEach(planet::addProbe);
-
-        return repository.save(planet);
+        return repository.save(new Planet(name, width, height));
     }
 
     @Override

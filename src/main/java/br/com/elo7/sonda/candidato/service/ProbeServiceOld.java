@@ -3,14 +3,12 @@ package br.com.elo7.sonda.candidato.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.annotations.VisibleForTesting;
 import br.com.elo7.sonda.candidato.controller.dto.InputDTO;
 import br.com.elo7.sonda.candidato.controller.dto.ProbeDTO;
 import br.com.elo7.sonda.candidato.model.enums.Command;
-import br.com.elo7.sonda.candidato.model.enums.Direction;
 import br.com.elo7.sonda.candidato.model.entity.Planet;
 import br.com.elo7.sonda.candidato.model.entity.Probe;
 import br.com.elo7.sonda.candidato.persistence.Planets;
@@ -18,9 +16,9 @@ import br.com.elo7.sonda.candidato.persistence.Probes;
 
 @Service
 public class ProbeServiceOld {
-	//@Autowired
+
 	private Planets planets;
-	//@Autowired
+
 	private Probes probes;
 	
 	public List<Probe> landProbes(InputDTO input) {
