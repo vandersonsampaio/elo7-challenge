@@ -1,42 +1,56 @@
 package br.com.elo7.sonda.candidato.model.entity;
 
-import br.com.elo7.sonda.candidato.model.entity.Planet;
+import br.com.elo7.sonda.candidato.model.enums.Direction;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.time.LocalDateTime;
+
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Probe {
-	private int id;
-	private int x;
-	private int y;
-	private char direction;
-	private Planet planet;
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
+	@Getter
+	@EqualsAndHashCode.Include
+	private final String name;
+
+	@Getter
+	private int x;
+	@Getter
+	private int y;
+
+	private Direction direction;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	private LocalDateTime registerTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	private LocalDateTime updateTime;
+
+	public Probe(String name, int x, int y, Direction direction) {
+		this.name = name;
 		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
 		this.y = y;
-	}
-	public char getDirection() {
-		return direction;
-	}
-	public void setDirection(char direction) {
 		this.direction = direction;
 	}
-	public Planet getPlanet() {
-		return planet;
+
+	public void turnLeft() {
+		direction = Direction.previousElement(direction);
 	}
-	public void setPlanet(Planet planet) {
-		this.planet = planet;
+
+	public void turnRight() {
+		direction = Direction.nextElement(direction);
 	}
+
+	public void move() {
+		x += 1;
+		y += 1;
+	}
+
 }
+

@@ -18,9 +18,9 @@ import br.com.elo7.sonda.candidato.persistence.Probes;
 
 @Service
 public class ProbeServiceOld {
-	@Autowired
+	//@Autowired
 	private Planets planets;
-	@Autowired
+	//@Autowired
 	private Probes probes;
 	
 	public List<Probe> landProbes(InputDTO input) {
@@ -51,7 +51,7 @@ public class ProbeServiceOld {
 	private void moveProbeForward(Probe probe) {
 		int newX = probe.getX();
 		int newY = probe.getY();
-		switch (probe.getDirection()) {
+		/*switch (probe.getDirection()) {
 			case Direction.N:
 				newY++;
 				break;
@@ -66,12 +66,12 @@ public class ProbeServiceOld {
 				break;
 		}
 		probe.setX(newX);
-		probe.setY(newY);
+		probe.setY(newY);*/
 	}
 
 	private void turnProbeLeft(Probe probe) {
-		char newDirection = Direction.N;
-		switch (probe.getDirection()) {
+		//char newDirection = Direction.N;
+		/*switch (probe.getDirection()) {
 			case Direction.N:
 				newDirection = Direction.W;
 				break;
@@ -85,11 +85,11 @@ public class ProbeServiceOld {
 				newDirection = Direction.N;
 				break;
 		}
-		probe.setDirection(newDirection);
+		probe.setDirection(newDirection);*/
 	}
 	
 	private void turnProbeRight(Probe probe) {
-		char newDirection = Direction.N;
+		/*char newDirection = Direction.N;
 		switch (probe.getDirection()) {
 			case Direction.N:
 				newDirection = Direction.E;
@@ -105,7 +105,7 @@ public class ProbeServiceOld {
 				break;
 		}
 		System.out.println(newDirection);
-		probe.setDirection(newDirection);
+		probe.setDirection(newDirection);*/
 		
 	}
 	
@@ -125,18 +125,20 @@ public class ProbeServiceOld {
 	}
 	
 	private Probe convertProbe(ProbeDTO probeDto, Planet planet) {
-		Probe probe = new Probe();
+		/*Probe probe = new Probe();
 		probe.setPlanet(planet);
 		probe.setX(probeDto.getX());
 		probe.setY(probeDto.getY());
 		probe.setDirection(probeDto.getDirection());
-		return probe;
+		return probe;*/
+		return null;
 	}
 	
 	private Planet concertPlanet(InputDTO input) {
-		Planet planet = new Planet();
+	/*	Planet planet = new Planet();
 		planet.setHeight(input.getHeight());
 		planet.setWidth(input.getWidth());
-		return planet;
+		return planet;*/
+		return null;
 	}
 }

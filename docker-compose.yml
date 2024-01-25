@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: p@ss#2o24!
+      MONGO_INITDB_DATABASE: db_probe-challenge
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./setup/volumes:/data/db
+      - ./setup/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  planetprobe:
+    container_name: planetprobe
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: planet-probe:latest
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_DATABASE: db_probe-challenge
+      SPRING_DATA_MONGODB_USERNAME: probe-user
+      SPRING_DATA_MONGODB_PASSWORD: pr0be_Ch@lleng&2o24!
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
