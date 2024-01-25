@@ -1,4 +1,4 @@
-package br.com.elo7.sonda.candidato.model;
+package br.com.elo7.sonda.candidato.model.enums;
 
 public class Direction {
     public static final char N = 'N';

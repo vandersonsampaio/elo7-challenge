@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.google.common.collect.Lists;
-import br.com.elo7.sonda.candidato.model.Planet;
-import br.com.elo7.sonda.candidato.model.Probe;
+import br.com.elo7.sonda.candidato.model.entity.Planet;
+import br.com.elo7.sonda.candidato.model.entity.Probe;
 
 @Component
 class InMemoryDatabase {

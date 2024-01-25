@@ -1,4 +1,4 @@
-package br.com.elo7.sonda.candidato.model;
+package br.com.elo7.sonda.candidato.model.enums;
 
 public class Command {
     public static final char L = 'L';

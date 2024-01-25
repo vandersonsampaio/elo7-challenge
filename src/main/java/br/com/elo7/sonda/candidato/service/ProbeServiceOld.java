@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.annotations.VisibleForTesting;
-import br.com.elo7.sonda.candidato.dto.InputDTO;
-import br.com.elo7.sonda.candidato.dto.ProbeDTO;
-import br.com.elo7.sonda.candidato.model.Command;
-import br.com.elo7.sonda.candidato.model.Direction;
-import br.com.elo7.sonda.candidato.model.Planet;
-import br.com.elo7.sonda.candidato.model.Probe;
+import br.com.elo7.sonda.candidato.controller.dto.InputDTO;
+import br.com.elo7.sonda.candidato.controller.dto.ProbeDTO;
+import br.com.elo7.sonda.candidato.model.enums.Command;
+import br.com.elo7.sonda.candidato.model.enums.Direction;
+import br.com.elo7.sonda.candidato.model.entity.Planet;
+import br.com.elo7.sonda.candidato.model.entity.Probe;
 import br.com.elo7.sonda.candidato.persistence.Planets;
 import br.com.elo7.sonda.candidato.persistence.Probes;
 

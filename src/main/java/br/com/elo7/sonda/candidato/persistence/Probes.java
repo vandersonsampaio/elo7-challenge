@@ -2,7 +2,7 @@ package br.com.elo7.sonda.candidato.persistence;
 
 import java.util.Optional;
 
-import br.com.elo7.sonda.candidato.model.Probe;
+import br.com.elo7.sonda.candidato.model.entity.Probe;
 
 public interface Probes {
 

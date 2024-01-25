@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.elo7.sonda.candidato.dto.InputDTO;
-import br.com.elo7.sonda.candidato.model.Probe;
+import br.com.elo7.sonda.candidato.controller.dto.InputDTO;
+import br.com.elo7.sonda.candidato.model.entity.Probe;
 import br.com.elo7.sonda.candidato.service.ProbeServiceOld;
 
 @Controller

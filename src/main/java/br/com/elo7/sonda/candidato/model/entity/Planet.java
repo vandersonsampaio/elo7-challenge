@@ -1,9 +1,21 @@
-package br.com.elo7.sonda.candidato.model;
+package br.com.elo7.sonda.candidato.model.entity;
 
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
 public class Planet {
+
 	private int id;
+
+	private String name;
 	private int width;
 	private int height;
+
+	private int[][] maps;
+
+	private List<Probe> probs;
 	
 	@Override
 	public int hashCode() {
@@ -18,20 +30,11 @@ public class Planet {
 		return false;
 	}
 
-	public int getId() {
-		return id;
-	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getWidth() {
-		return width;
-	}
 	public void setWidth(int width) {
 		this.width = width;
-	}
-	public int getHeight() {
-		return height;
 	}
 	public void setHeight(int height) {
 		this.height = height;

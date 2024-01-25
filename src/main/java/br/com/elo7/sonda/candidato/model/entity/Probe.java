@@ -1,4 +1,6 @@
-package br.com.elo7.sonda.candidato.model;
+package br.com.elo7.sonda.candidato.model.entity;
+
+import br.com.elo7.sonda.candidato.model.entity.Planet;
 
 public class Probe {
 	private int id;
