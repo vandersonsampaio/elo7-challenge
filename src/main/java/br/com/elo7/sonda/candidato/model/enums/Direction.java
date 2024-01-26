@@ -1,18 +1,26 @@
 package br.com.elo7.sonda.candidato.model.enums;
 
+import lombok.Getter;
+
 public enum Direction {
 
-	N(0),
-	E(1),
-	S(2),
-	W(3);
+	N(0, 0, 1),
+	E(1, 1, 0),
+	S(2, 0, -1),
+	W(3, -1, 0);
 
 	final int value;
+	@Getter
+	final int movX;
+	@Getter
+	final int movY;
 
 	private static final Direction[] DIRECTIONS;
 
-	Direction(int value) {
+	Direction(int value, int movX, int movY) {
 		this.value = value;
+		this.movX = movX;
+		this.movY = movY;
 	}
 
 	static {

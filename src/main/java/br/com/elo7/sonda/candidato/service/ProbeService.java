@@ -7,8 +7,12 @@ import java.util.List;
 public interface ProbeService {
 
     Probe create(String planetName, Probe entity);
-    Probe move(String planetName, String probeName, String command);
+
+    Probe move(String planetName, String probeName, List<MovimentationCommand> commands);
+
     Probe getProbe(String planetName, String probeName);
+
     List<Probe> listAllProbes(String planetName);
-    void returnProbe(String planetName, String probeName);
+
+    void departureProbe(String planetName, String probeName);
 }

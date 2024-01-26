@@ -100,4 +100,10 @@ public class Planet {
 	public boolean positionEmpty(int x, int y) {
 		return map[x][y] == 0;
 	}
+
+	public void departure(String probeName) {
+		Probe probe = getProb(probeName);
+		map[probe.getX()][probe.getY()] = 0;
+		probes.remove(probe);
+	}
 }

@@ -39,4 +39,9 @@ public class PlanetServiceImpl implements PlanetService {
     public List<Planet> findAllPlanets() {
         return repository.findAll();
     }
+
+    @Override
+    public void save(Planet entity) {
+        repository.save(entity);
+    }
 }

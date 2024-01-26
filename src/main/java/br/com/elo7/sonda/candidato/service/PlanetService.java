@@ -11,4 +11,6 @@ public interface PlanetService {
 
     Planet getPlanet(String name);
     List<Planet> findAllPlanets();
+
+    void save(Planet entity);
 }

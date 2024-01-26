@@ -6,16 +6,15 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Probe {
 
-	@Getter
 	@EqualsAndHashCode.Include
 	private String name;
 
-	@Getter
 	private int x;
-	@Getter
+
 	private int y;
 
 	private Direction direction;
@@ -29,6 +28,7 @@ public class Probe {
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
+		this.registerTime = LocalDateTime.now();
 	}
 
 	public void turnLeft() {
@@ -40,8 +40,8 @@ public class Probe {
 	}
 
 	public void move() {
-		x += 1;
-		y += 1;
+		x += direction.getMovX();
+		y += direction.getMovY();
 	}
 
 }
