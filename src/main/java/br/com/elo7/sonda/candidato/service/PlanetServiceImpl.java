@@ -1,6 +1,8 @@
 package br.com.elo7.sonda.candidato.service;
 
 import br.com.elo7.sonda.candidato.model.entity.Planet;
+import br.com.elo7.sonda.candidato.model.expection.EntityNotFoundException;
+import br.com.elo7.sonda.candidato.model.expection.UniqueEntityException;
 import br.com.elo7.sonda.candidato.model.repository.PlanetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,23 +18,24 @@ public class PlanetServiceImpl implements PlanetService {
     @Override
     public Planet create(String name, int width, int height) {
         if (repository.existsByName(name)) {
-            throw new RuntimeException();
+            throw new UniqueEntityException(Planet.class.getName(), name);
         }
 
-        return repository.save(new Planet(name, width, height));
+        return save(new Planet(name, width, height));
     }
 
     @Override
     public Planet updateDimentions(String name, int width, int height) {
         Planet planet = getPlanet(name);
-        planet.resizeDimentions(width, height);
+        planet.resizeMap(width, height);
 
-        return repository.save(planet);
+        return save(planet);
     }
 
     @Override
     public Planet getPlanet(String name) {
-        return repository.findByName(name).orElseThrow();
+        return repository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException(Planet.class.getName(), name));
     }
 
     @Override
@@ -41,7 +44,7 @@ public class PlanetServiceImpl implements PlanetService {
     }
 
     @Override
-    public void save(Planet entity) {
-        repository.save(entity);
+    public Planet save(Planet entity) {
+        return repository.save(entity);
     }
 }

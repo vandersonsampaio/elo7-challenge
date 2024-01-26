@@ -1,12 +1,11 @@
 package br.com.elo7.sonda.candidato.service;
 
-import br.com.elo7.sonda.candidato.model.entity.Probe;
+import br.com.elo7.sonda.candidato.model.entity.Planet;
 
 public class MoveCommand implements MovimentationCommand {
 
     @Override
-    public void action(Probe probe) {
-        //TODO verificar crash com outros probes
-        probe.move();
+    public void action(Planet planet, String probeName) {
+        planet.moveProbe(probeName);
     }
 }

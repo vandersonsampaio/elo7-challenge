@@ -33,15 +33,24 @@ public class Probe {
 
 	public void turnLeft() {
 		direction = Direction.previousElement(direction);
+
+		update();
 	}
 
 	public void turnRight() {
 		direction = Direction.nextElement(direction);
+
+		update();
 	}
 
 	public void move() {
 		x += direction.getMovX();
 		y += direction.getMovY();
+
+		update();
 	}
 
+	private void update() {
+		updateTime = LocalDateTime.now();
+	}
 }

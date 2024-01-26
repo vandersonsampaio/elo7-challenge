@@ -80,3 +80,13 @@ Com isso as dependências serão baixadas e a API subirá na porta `8080`;
 ```bash
 curl -X POST http://localhost:8080/planet-with-probes -H 'Content-Type: application/json' -d '{"width":10,"height":10,"probes":[{"x":1,"y":2,"direction":"N","commands": "LMLMLMLMM"},{"x":3,"y":3,"direction":"E","commands": "MMRMMRMRRM"}]}'
 ```
+
+
+
+-------------------------
+Premissas:
+A área começa de ZERO;
+Caso uma cadeia de movimento dê falha, todo o movimento será desfeito
+É possível redimensionar área, desde que nenhuma sonda fique fora da nova área delimitada
+Não é permitido duas sondas ocuparem o mesmo espaço
+Cada sonda deve ter um nome único por planeta, ou seja, no Planeta P somente poderá ter uma sonda S

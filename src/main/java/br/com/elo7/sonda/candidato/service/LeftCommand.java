@@ -1,11 +1,14 @@
 package br.com.elo7.sonda.candidato.service;
 
+import br.com.elo7.sonda.candidato.model.entity.Planet;
 import br.com.elo7.sonda.candidato.model.entity.Probe;
 
 public class LeftCommand implements MovimentationCommand {
 
     @Override
-    public void action(Probe probe) {
+    public void action(Planet planet, String probeName) {
+        Probe probe = planet.getProb(probeName);
+
         probe.turnLeft();
     }
 }

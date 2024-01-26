@@ -16,6 +16,11 @@ public class ProbeServiceImpl implements ProbeService{
     @Override
     public Probe create(String planetName, Probe entity) {
         Planet planet = planetService.getPlanet(planetName);
+
+        if (planet.getProb(planetName) != null) {
+            throw new RuntimeException();
+        }
+
         planet.addProbe(entity);
 
         planetService.save(planet);
@@ -25,11 +30,11 @@ public class ProbeServiceImpl implements ProbeService{
     @Override
     public Probe move(String planetName, String probeName, List<MovimentationCommand> commands) {
         Planet planet = planetService.getPlanet(planetName);
-        Probe probe = planet.getProb(probeName);
 
-        commands.forEach(c -> c.action(probe));
+        commands.forEach(c -> c.action(planet, probeName));
         planetService.save(planet);
-        return probe;
+
+        return planet.getProb(probeName);
     }
 
     @Override
