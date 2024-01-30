@@ -16,11 +16,6 @@ public class ProbeServiceImpl implements ProbeService{
     @Override
     public Probe create(String planetName, Probe entity) {
         Planet planet = planetService.getPlanet(planetName);
-
-        if (planet.getProb(planetName) != null) {
-            throw new RuntimeException();
-        }
-
         planet.addProbe(entity);
 
         planetService.save(planet);
