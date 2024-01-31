@@ -39,12 +39,12 @@ public class ProbeClient {
                 .with()
                 .body(request)
                 .when()
-                .post(BASE_URI + PATH_PARAM_FULL + "/departure");
+                .post(BASE_URI + PATH_PARAM_FULL + "/move");
     }
 
     public Response findAll(String planetName) {
         return given()
-                .pathParam(PATH_PARAM, planetName)
+                .pathParam(PATH_PARAM_PLANET_NAME, planetName)
                 .spec(specBuilder)
                 .when()
                 .get(BASE_URI);

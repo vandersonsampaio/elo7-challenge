@@ -89,12 +89,12 @@ public class Planet {
 
 	public Probe getProb(String name) {
 		return probes.stream().filter(p -> p.getName().equals(name)).findAny()
-				.orElseThrow(() -> new EntityNotFoundException(Probe.class.getName(), name));
+				.orElseThrow(() -> new EntityNotFoundException(Probe.class.getSimpleName(), name));
 	}
 
 	public void addProbe(Probe probe) {
 		if (probes.stream().anyMatch(p -> p.equals(probe))) {
-			throw new UniqueEntityException(Probe.class.getName(), probe.getName());
+			throw new UniqueEntityException(Probe.class.getSimpleName(), probe.getName());
 		}
 
 		if (!positionEmpty(probe.getX(), probe.getY())) {
@@ -108,7 +108,7 @@ public class Planet {
 	}
 
 	public boolean positionEmpty(int x, int y) {
-		return map[x][y] == 0;
+		return x < width && y < height && map[x][y] == 0;
 	}
 
 	public void departure(String probeName) {

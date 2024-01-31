@@ -75,7 +75,6 @@ public class ProbeController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Probe.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = SimpleErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Probe>> findAll(@PathVariable("planetName") String planetName) {
@@ -107,7 +106,6 @@ public class ProbeController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = SimpleErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @PostMapping(value = "/{probeName}/departure")
     public ResponseEntity<Void> departure(@PathVariable("planetName") String planetName,
