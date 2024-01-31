@@ -11,6 +11,6 @@ import javax.validation.constraints.Pattern;
 @Getter
 public class MovimentProbeRequest {
 
-    @Pattern(regexp = "^[LRM]+$", message = "Olny three moviment posible. L R M")
+    @Pattern(regexp = "^[LRM]+$", message = "Only three moviment posible. L R M")
     String moviment;
 }

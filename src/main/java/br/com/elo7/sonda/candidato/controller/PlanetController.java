@@ -79,7 +79,7 @@ public class PlanetController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Planet.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Planet>> findAllPlanet() {
+    public ResponseEntity<List<Planet>> findAllPlanets() {
         return ResponseEntity.ok(service.findAllPlanets());
     }
 }
