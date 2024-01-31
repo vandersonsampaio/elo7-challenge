@@ -71,7 +71,6 @@ public class PlanetController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Planet.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = SimpleErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Planet> getPlanet(@PathVariable String name) {

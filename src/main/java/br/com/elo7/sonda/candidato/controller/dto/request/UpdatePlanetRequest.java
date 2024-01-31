@@ -9,8 +9,8 @@ import javax.validation.constraints.Positive;
 @Getter
 public class UpdatePlanetRequest {
 
-    @Positive
+    @Positive(message = "Width cannot be negative or zero.")
     private int width;
-    @Positive
+    @Positive(message = "Height cannot be negative or zero.")
     private int height;
 }

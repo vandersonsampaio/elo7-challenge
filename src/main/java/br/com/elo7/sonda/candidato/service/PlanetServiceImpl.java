@@ -18,7 +18,7 @@ public class PlanetServiceImpl implements PlanetService {
     @Override
     public Planet create(String name, int width, int height) {
         if (repository.existsByName(name)) {
-            throw new UniqueEntityException(Planet.class.getName(), name);
+            throw new UniqueEntityException(Planet.class.getSimpleName(), name);
         }
 
         return save(new Planet(name, width, height));
@@ -35,7 +35,7 @@ public class PlanetServiceImpl implements PlanetService {
     @Override
     public Planet getPlanet(String name) {
         return repository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException(Planet.class.getName(), name));
+                .orElseThrow(() -> new EntityNotFoundException(Planet.class.getSimpleName(), name));
     }
 
     @Override

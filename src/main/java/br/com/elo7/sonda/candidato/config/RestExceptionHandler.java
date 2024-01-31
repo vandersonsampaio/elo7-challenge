@@ -8,11 +8,17 @@ import br.com.elo7.sonda.candidato.model.expection.SimpleErrorResponse;
 import br.com.elo7.sonda.candidato.model.expection.SpaceNotAvailableException;
 import br.com.elo7.sonda.candidato.model.expection.UniqueEntityException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
@@ -36,6 +42,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(ex.getMessage());
 
         return new ResponseEntity<>(new SimpleErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        log.error(ex.getMessage(), ex);
+
+        String message = ex.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining("\r\n"));
+
+        return buildResponseEntity(new ErrorResponse(HttpStatus.BAD_REQUEST, message));
     }
 
     private ResponseEntity<Object> buildResponseEntity(ErrorResponse apiError) {

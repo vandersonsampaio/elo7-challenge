@@ -10,10 +10,10 @@ import javax.validation.constraints.Positive;
 @Getter
 public class CreatePlanetRequest {
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank.")
     private final String name;
-    @Positive
+    @Positive(message = "Width cannot be negative or zero.")
     private final int width;
-    @Positive
+    @Positive(message = "Height cannot be negative or zero.")
     private final int height;
 }
