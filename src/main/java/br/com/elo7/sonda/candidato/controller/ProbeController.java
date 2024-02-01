@@ -40,7 +40,7 @@ public class ProbeController {
     private final ProbeMapper mapper;
 
     @Operation(
-            summary = "Lend a Probe in a Planet",
+            summary = "Land a Probe in a Planet",
             description = "Create a Probe in a Planet.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Probe.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
@@ -48,9 +48,9 @@ public class ProbeController {
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE) }),
             @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Probe> lend(@PathVariable("planetName") String planetName,
+    public ResponseEntity<Probe> land(@PathVariable("planetName") String planetName,
                      @Valid @RequestBody CreateProbeRequest request) {
-        log.info("m=lend, planet={}, probe={}", planetName, request.getName());
+        log.info("m=land, planet={}, probe={}", planetName, request.getName());
         return new ResponseEntity<>(service.create(planetName, mapper.from(request)), HttpStatus.CREATED);
     }
 

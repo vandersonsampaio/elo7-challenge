@@ -41,7 +41,7 @@ public class ProbeHelper extends SevenMarsApplicationIT {
         client = new ProbeClient(port);
     }
 
-    protected ErrorResponse lendProbeBadRequest(String planetName, CreateProbeRequest request) {
+    protected ErrorResponse landProbeBadRequest(String planetName, CreateProbeRequest request) {
         Response response = client.create(planetName, request);
 
         response.then().statusCode(HttpStatus.BAD_REQUEST.value());
@@ -49,7 +49,7 @@ public class ProbeHelper extends SevenMarsApplicationIT {
         return response.as(ErrorResponse.class);
     }
 
-    protected SimpleErrorResponse lendProbeNotFound(String planetName, CreateProbeRequest request) {
+    protected SimpleErrorResponse landProbeNotFound(String planetName, CreateProbeRequest request) {
         Response response = client.create(planetName, request);
 
         response.then().statusCode(HttpStatus.NOT_FOUND.value());
@@ -57,7 +57,7 @@ public class ProbeHelper extends SevenMarsApplicationIT {
         return response.as(SimpleErrorResponse.class);
     }
 
-    protected Probe lendProbe(String planetName, CreateProbeRequest request) {
+    protected Probe landProbe(String planetName, CreateProbeRequest request) {
         Response response = client.create(planetName, request);
 
         response.then().statusCode(HttpStatus.CREATED.value());

@@ -51,10 +51,10 @@ class ProbeControllerTest {
     }
 
     @Test
-    void shouldLendProbeInAPlanet() {
+    void shouldLandProbeInAPlanet() {
         when(service.create(eq(PLANET_NAME), any(Probe.class))).thenReturn(generateProbe());
 
-        ResponseEntity<Probe> actual = controller.lend(PLANET_NAME, new CreateProbeRequest(PROBE_NAME, 1, 1, Direction.N));
+        ResponseEntity<Probe> actual = controller.land(PLANET_NAME, new CreateProbeRequest(PROBE_NAME, 1, 1, Direction.N));
 
         verify(service).create(eq(PLANET_NAME), probeCaptor.capture());
 

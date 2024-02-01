@@ -25,76 +25,76 @@ class ProbeIntegrationTest extends ProbeHelper {
 
     @Test
     @DisplayName("Deve retornar erro ao tentar pousar uma sonda sem nome")
-    void shouldThrowExceptionWhenLendProbeWithNoName() {
+    void shouldThrowExceptionWhenLandProbeWithNoName() {
         CreateProbeRequest request = new CreateProbeRequest("", X_DEFAULT, Y_DEFAULT, Direction.N);
 
-        ErrorResponse actual = lendProbeBadRequest(PLANET_NAME_DEFAULT, request);
+        ErrorResponse actual = landProbeBadRequest(PLANET_NAME_DEFAULT, request);
 
         assertThat(actual.getMessage()).contains(BLANK_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda com posicao X negativa")
-    void shouldThrowExceptionWhenNegativeXInLendProbe() {
+    void shouldThrowExceptionWhenNegativeXInLandProbe() {
         String probeName = "probe-x-negative";
         CreateProbeRequest request = new CreateProbeRequest(probeName, -1, Y_DEFAULT, Direction.N);
 
-        ErrorResponse actual = lendProbeBadRequest(PLANET_NAME_DEFAULT, request);
+        ErrorResponse actual = landProbeBadRequest(PLANET_NAME_DEFAULT, request);
 
         assertThat(actual.getMessage()).contains(NEGATIVE_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda com posicao Y negativa")
-    void shouldThrowExceptionWhenNegativeYInLendProbe() {
+    void shouldThrowExceptionWhenNegativeYInLandProbe() {
         String probeName = "probe-y-negative";
         CreateProbeRequest request = new CreateProbeRequest(probeName, X_DEFAULT, -1, Direction.N);
 
-        ErrorResponse actual = lendProbeBadRequest(PLANET_NAME_DEFAULT, request);
+        ErrorResponse actual = landProbeBadRequest(PLANET_NAME_DEFAULT, request);
 
         assertThat(actual.getMessage()).contains(NEGATIVE_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda sem direcao")
-    void shouldThrowExceptionWhenNoDirectionInLendProbe() {
+    void shouldThrowExceptionWhenNoDirectionInLandProbe() {
         String probeName = "probe-direction-null";
         CreateProbeRequest request = new CreateProbeRequest(probeName, X_DEFAULT, Y_DEFAULT, null);
 
-        ErrorResponse actual = lendProbeBadRequest(PLANET_NAME_DEFAULT, request);
+        ErrorResponse actual = landProbeBadRequest(PLANET_NAME_DEFAULT, request);
 
         assertThat(actual.getMessage()).contains("cannot be null");
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda em um planeta nao cadastrado")
-    void shouldThrowExceptionWhenLendProbeInPlanetNotFound() {
+    void shouldThrowExceptionWhenLandProbeInPlanetNotFound() {
         String planetName = "planet-not-found";
         String probeName = "probe-default";
         CreateProbeRequest request = new CreateProbeRequest(probeName, X_DEFAULT, Y_DEFAULT, Direction.N);
 
-        SimpleErrorResponse actual = lendProbeNotFound(planetName, request);
+        SimpleErrorResponse actual = landProbeNotFound(planetName, request);
 
         assertThat(actual.getMessage()).contains(NOT_FOUND_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda com nome repetido no planeta")
-    void shouldThrowExceptionWhenLendProbeWithSameName() {
+    void shouldThrowExceptionWhenLandProbeWithSameName() {
         String planetName = "planet-repeated-probes";
         String probeName = "probe-repeated";
         CreateProbeRequest request = new CreateProbeRequest(probeName, X_DEFAULT, Y_DEFAULT, Direction.N);
 
         insertPlanetAndProbe(planetName, probeName);
 
-        ErrorResponse actual = lendProbeBadRequest(planetName, request);
+        ErrorResponse actual = landProbeBadRequest(planetName, request);
 
         assertThat(actual.getMessage()).contains(NOT_UNIQUE_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda em uma localizacao do planeta nao disponivel")
-    void shouldThrowExceptionWhenLendProbeWithBusySpace() {
+    void shouldThrowExceptionWhenLandProbeWithBusySpace() {
         String planetName = "planet-busy-space";
         String probeName = "probe-original-space";
         String probeNameBusy = "probe-busy-space";
@@ -102,28 +102,28 @@ class ProbeIntegrationTest extends ProbeHelper {
 
         insertPlanetAndProbe(planetName, probeName);
 
-        ErrorResponse actual = lendProbeBadRequest(planetName, request);
+        ErrorResponse actual = landProbeBadRequest(planetName, request);
 
         assertThat(actual.getMessage()).contains(SPACE_NOT_AVAILABLE_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve retornar error ao tentar pousar uma sonda em uma localizacao do planeta além da mapeada")
-    void shouldThrowExceptionWhenLendProbeWithIlligalSpace() {
+    void shouldThrowExceptionWhenLandProbeWithIlligalSpace() {
         String planetName = "planet-illigal-probe";
         String probeName = "probe-illigal-position";
         CreateProbeRequest request = new CreateProbeRequest(probeName, WIDTH_DEFAULT + 1, HEIGHT_DEFAULT + 3, Direction.N);
 
         insertPlanet(planetName);
 
-        ErrorResponse actual = lendProbeBadRequest(planetName, request);
+        ErrorResponse actual = landProbeBadRequest(planetName, request);
 
         assertThat(actual.getMessage()).contains(SPACE_NOT_AVAILABLE_MESSAGE);
     }
 
     @Test
     @DisplayName("Deve pousar uma sonda em um planeta")
-    void shouldLendProbe() {
+    void shouldLandProbe() {
         String planetName = "planet-success";
         String probeName = "probe-success";
         String probeNameSuccess = "probe-success-second";
@@ -134,7 +134,7 @@ class ProbeIntegrationTest extends ProbeHelper {
 
         insertPlanetAndProbe(planetName, probeName);
 
-        Probe actual = lendProbe(planetName, request);
+        Probe actual = landProbe(planetName, request);
 
         assertProbe(actual, probeNameSuccess, x, y, direction);
         assertThat(actual.getUpdateTime()).isNull();
@@ -233,7 +233,7 @@ class ProbeIntegrationTest extends ProbeHelper {
 
     @Test
     @DisplayName("Deve retirar uma sonda de um planeta e realizar um novo pouso no mesmo local")
-    void shouldDepartureProbeAndLendOtherProbeTheSameLocal() {
+    void shouldDepartureProbeAndLandOtherProbeTheSameLocal() {
         String planetName = "planet-departure-success-relend";
         String probeName = "probe-departure-success-relend";
         insertPlanetAndProbe(planetName, probeName);
@@ -241,7 +241,7 @@ class ProbeIntegrationTest extends ProbeHelper {
         departureProbe(planetName, probeName);
 
         CreateProbeRequest request = new CreateProbeRequest(probeName, 0, 0, Direction.N);
-        Probe actual = lendProbe(planetName, request);
+        Probe actual = landProbe(planetName, request);
 
         assertProbe(actual, probeName, 0, 0, Direction.N);
     }
